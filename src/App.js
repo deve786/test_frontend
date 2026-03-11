@@ -12,6 +12,7 @@ import Services from "./Components/Services";
 import Projects from "./Components/Projects";
 
 import Contact from "./Components/Contact";
+import Careers from "./Components/Careers";
 import News from "./Components/News";
 
 
@@ -27,7 +28,7 @@ function App() {
         <Route path="/Projects" element={<Projects />} />
         <Route path="/services" element={<Services />} />
         <Route path="/news" element={<News />} />
-
+        <Route path="/careers" element={<Careers />} />
         <Route path="/contact" element={<Contact />} />
 
         

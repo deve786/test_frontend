@@ -50,11 +50,12 @@ const Contact = () => {
           <img src="https://img.icons8.com/ios-filled/100/6366f1/email.png" />
           <h3>Email</h3>
           <p>info@orbitqa.com</p>
+          <p>sales@orbitqa.com</p>
         </div>
         <div className="card">
           <img src="https://img.icons8.com/ios-filled/100/6366f1/phone.png" />
           <h3>Call</h3>
-          <p>+974 4005 2222</p>
+          <p>+974 3119 1887</p>
         </div>
       </section>
 
@@ -139,7 +140,7 @@ const Contact = () => {
 
       {/* WHATSAPP FLOATING BUTTON */}
       <a
-        href="https://wa.me/97440052222"
+        href="https://wa.me/97431191887"
         target="_blank"
         rel="noopener noreferrer"
         className="whatsapp-float"

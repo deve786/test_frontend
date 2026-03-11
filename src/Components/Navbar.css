@@ -33,6 +33,14 @@
   transition: transform 0.3s ease;
 }
 
+/* Default logo */
+
+/* White logo when on dark background */
+.logo-white {
+  filter: brightness(0) invert(1);
+}
+
+
 .logo-img:hover {
   transform: scale(1.05);
 }
@@ -258,3 +266,5 @@
     font-size: 1rem;
   }
 }
+
+

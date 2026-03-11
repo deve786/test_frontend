@@ -4,11 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 // Import images
 import heroImage from "../assets/j.png";
-import ceoImage from "../assets/ceo.jpg";
-import team1 from "../assets/ceo.jpg";
-import team2 from "../assets/ceo.jpg";
-import team3 from "../assets/ceo.jpg";
-import team4 from "../assets/ceo.jpg";
+import ceoImage from "../assets/ceo.png";
+
 import bgVision from "../assets/j.png";
 
 const About = () => {
@@ -203,27 +200,7 @@ const About = () => {
 </section>
 
 
-{/* TEAM */}
-<section className="about-team">
-  <h2>Our Leadership</h2>
-  <p className="team-caption">
-    Meet the visionary leaders driving Orbit’s success and innovation.
-  </p>
-  <div className="team-grid">
-    {[team1, team2, team3, team4].map((img, i) => (
-      <div className="team-wrapper" key={i}>
-        <div className="team-card">
-          <img src={img} alt={`Team ${i + 1}`} />
-        </div>
-        <h4>Team Member</h4>
-        <p>{["CEO", "CTO", "PM", "Architect"][i]}</p>
-      </div>
-    ))}
-  </div>
-  <button onClick={() => navigate("/contact")} className="primary-btn">
-    Contact Us
-  </button>
-</section>
+
 
 {/* TESTIMONIALS */}
       <section className="testimonials">

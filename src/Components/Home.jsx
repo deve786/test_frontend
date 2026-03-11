@@ -37,7 +37,7 @@ import cert11 from "../assets/l11.png";
 const slides = [
   {
     image: slide1,
-    title: "Trusted Telecom & IT Solutions",
+    title: "Trusted Telecom & OSP Solutions",
     description:
       "Over 20 years delivering top-tier Telecom, ELV, and IT Networking services in Qatar.",
   },
