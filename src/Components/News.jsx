@@ -1,69 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./News.css";
-
-const newsData = [
-  {
-    id: 1,
-    title: "Nationwide Fiber Network Expansion Initiative",
-    date: "15 Jan 2026",
-    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df",
-    content:
-      "We have successfully accelerated our nationwide fiber optic expansion program, reinforcing high-capacity backbone infrastructure to support enterprise, government, and smart-city requirements. This initiative enhances bandwidth resilience, reduces latency, and enables future-ready digital ecosystems across critical regions.",
-  },
-  {
-    id: 2,
-    title: "Strategic Alliance with Global Telecom OEM",
-    date: "28 Dec 2025",
-    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df",
-    content:
-      "Through this strategic partnership, we strengthen our capability to deliver next-generation telecom solutions aligned with international compliance frameworks, operational excellence benchmarks, and long-term technology roadmaps.",
-  },
-  {
-    id: 3,
-    title: "Launch of Advanced ELV & Smart Systems Division",
-    date: "05 Dec 2025",
-    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df",
-    content:
-      "Our newly launched ELV and Smart Systems division focuses on intelligent surveillance, access control, automation, and integrated communication platforms designed for commercial and mission-critical environments.",
-  },
-  {
-    id: 4,
-    title: "Launch of Advanced ELV & Smart Systems Division",
-    date: "05 Dec 2025",
-    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df",
-    content:
-      "Our newly launched ELV and Smart Systems division focuses on intelligent surveillance, access control, automation, and integrated communication platforms designed for commercial and mission-critical environments.",
-  },
-  {
-    id: 5,
-    title: "Launch of Advanced ELV & Smart Systems Division",
-    date: "05 Dec 2025",
-    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df",
-    content:
-      "Our newly launched ELV and Smart Systems division focuses on intelligent surveillance, access control, automation, and integrated communication platforms designed for commercial and mission-critical environments.",
-  },
-  {
-    id: 6,
-    title: "Launch of Advanced ELV & Smart Systems Division",
-    date: "05 Dec 2025",
-    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df",
-    content:
-      "Our newly launched ELV and Smart Systems division focuses on intelligent surveillance, access control, automation, and integrated communication platforms designed for commercial and mission-critical environments.",
-  },
-  {
-    id: 7,
-    title: "Launch of Advanced ELV & Smart Systems Division",
-    date: "05 Dec 2025",
-    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df",
-    content:
-      "Our newly launched ELV and Smart Systems division focuses on intelligent surveillance, access control, automation, and integrated communication platforms designed for commercial and mission-critical environments.",
-  },
-
-
-];
+import { client, urlFor } from "../sanityClient";
 
 const News = () => {
+  const [newsData, setNewsData] = useState([]);
   const [activeId, setActiveId] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    client
+      .fetch(`*[_type == "news"] | order(date desc)`)
+      .then((data) => {
+        setNewsData(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Sanity fetch error:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading)
+    return (
+      <div style={{ padding: "100px", textAlign: "center" }}>Loading...</div>
+    );
 
   return (
     <>
@@ -82,41 +42,51 @@ const News = () => {
       <section className="news-section">
         <div className="news-subheading">All News</div>
 
-        <div className="news-grid">
-          {newsData.map((item) => {
-            const isActive = activeId === item.id;
+        {newsData.length === 0 ? (
+          <p style={{ textAlign: "center", padding: "40px" }}>
+            No news articles found. Please add news in Sanity Studio.
+          </p>
+        ) : (
+          <div className="news-grid">
+            {newsData.map((item) => {
+              const isActive = activeId === item._id;
 
-            return (
-              <article
-                key={item.id}
-                className={`news-card ${isActive ? "expanded" : ""}`}
-                onClick={() =>
-                  setActiveId(isActive ? null : item.id)
-                }
-              >
-                <div
-                  className="news-image"
-                  style={{ backgroundImage: `url(${item.image})` }}
-                />
+              return (
+                <article
+                  key={item._id}
+                  className={`news-card ${isActive ? "expanded" : ""}`}
+                  onClick={() => setActiveId(isActive ? null : item._id)}
+                >
+                  <div
+                    className="news-image"
+                    style={{
+                      backgroundImage: `url(${urlFor(item.image).width(600).url()})`,
+                    }}
+                  />
 
-                <div className="news-card-content">
-                  <span className="news-date">{item.date}</span>
-                  <h3>{item.title}</h3>
-
-                  <p>
-                    {isActive
-                      ? item.content
-                      : `${item.content.substring(0, 120)}...`}
-                  </p>
-
-                  <span className="news-toggle">
-                    {isActive ? "Collapse" : "Read More"}
-                  </span>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+                  <div className="news-card-content">
+                    <span className="news-date">
+                      {new Date(item.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </span>
+                    <h3>{item.title}</h3>
+                    <p>
+                      {isActive
+                        ? item.content
+                        : `${item.content.substring(0, 120)}...`}
+                    </p>
+                    <span className="news-toggle">
+                      {isActive ? "Collapse" : "Read More"}
+                    </span>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        )}
       </section>
     </>
   );

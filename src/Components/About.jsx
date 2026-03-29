@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./About.css";
 import { useNavigate } from "react-router-dom";
+import { client } from "../sanityClient";
 
 // Import images
 import heroImage from "../assets/j.png";
@@ -37,7 +38,14 @@ const About = () => {
 
     return () => clearInterval(interval);
   }, []);
+  const [testimonials, setTestimonials] = useState([]);
 
+useEffect(() => {
+  client
+    .fetch(`*[_type == "testimonial"]`)
+    .then((data) => setTestimonials(data))
+    .catch((err) => console.error("Sanity fetch error:", err));
+}, []);
   return (
     <div className="about-wrapper">
 
@@ -203,24 +211,22 @@ const About = () => {
 
 
 {/* TESTIMONIALS */}
-      <section className="testimonials">
-        <h2>What Clients Say</h2>
-        <div className="testimonial-grid">
-          <div className="testimonial">
-            <p>“Amazing service and very professional team.”</p>
-            <span>— Ahmed</span>
-          </div>
-          <div className="testimonial">
-            <p>“They understood our vision perfectly.”</p>
-            <span>— Sarah</span>
-          </div>
-          <div className="testimonial">
-            <p>“Fast delivery and great communication.”</p>
-            <span>— John</span>
-          </div>
+      {/* TESTIMONIALS */}
+<section className="testimonials">
+  <h2>What Clients Say</h2>
+  <div className="testimonial-grid">
+    {testimonials.length > 0 ? (
+      testimonials.map((t) => (
+        <div className="testimonial" key={t._id}>
+          <p>"{t.quote}"</p>
+          <span>— {t.author}</span>
         </div>
-      </section>
-
+      ))
+    ) : (
+      <p style={{ textAlign: "center" }}>No testimonials yet.</p>
+    )}
+  </div>
+</section>
 
 
 {/* TESTIMONIALS */}
