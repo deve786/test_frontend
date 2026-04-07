@@ -1,101 +1,201 @@
-/* Wrapper for the whole page */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700&display=swap');
+
+/* ===== WRAPPER ===== */
 .ca-wrapper {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'DM Sans', sans-serif;
+  background: #f8fafc;
 }
 
-/* Spacer for navbar height */
-.navbar-spacer {
-    height: 100px; /* adjust to your navbar height */
-}
+.navbar-spacer { height: 106px; }
 
-/* Hero Section */
+/* ===== HERO ===== */
 .ca-hero {
-    position: relative;
-    width: 100%;
-    height: calc(100vh - 70px); /* full screen minus navbar */
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 106px);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
-/* Overlay */
 .ca-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 38, 77, 0.7); /* navy blue with opacity */
-    z-index: 1;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(3,14,34,0.92), rgba(16,50,72,0.80), rgba(1,41,33,0.75));
+  z-index: 1;
 }
 
-/* Career content container */
+.ca-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300c5d4' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
 .career-container {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: #fff;
-    padding: 20px;
-    max-width: 500px;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  padding: 40px 5%;
+  max-width: 700px;
+  animation: fadeUp 1s ease;
 }
 
-/* Heading */
 .career-container h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+  margin-bottom: 20px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
 }
 
-/* Caption */
 .career-container p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    line-height: 1.5;
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  line-height: 1.75;
+  color: rgba(210,225,245,0.85);
+  font-weight: 400;
+  animation: fadeUp 1s ease 0.2s forwards;
+  opacity: 0;
 }
 
-
-
-/* ================= CTA BUTTON ================= */
+/* ===== UPLOAD BUTTON ===== */
 .upload-btn {
-  display: inline-block;
-  padding: 14px 38px;
-  background: linear-gradient(135deg, #d7e1e2, #023a7e);
-  color: #000000;
-  border-radius: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 48px;
+  background: linear-gradient(135deg, #00c5d4, #2563eb);
+  color: #ffffff;
+  border-radius: 50px;
   font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.4s ease;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-  animation: slideUpFade 0.8s ease forwards;
-  animation-delay: 0.3s;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25,0.8,0.25,1);
+  box-shadow: 0 10px 36px rgba(0, 197, 212, 0.45);
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 1s ease 0.38s forwards;
+  opacity: 0;
+}
+
+.upload-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .upload-btn:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 14px 34px rgba(129, 149, 152, 0.797);
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 20px 55px rgba(0, 197, 212, 0.6);
 }
 
+.upload-btn:hover::before { opacity: 1; }
 
+/* Floating decorative elements */
+.ca-hero .deco {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.06;
+  pointer-events: none;
+  animation: floatAround 12s ease-in-out infinite;
+}
+
+/* ===== CAREERS INFO SECTION ===== */
+.careers-info {
+  padding: 80px 5%;
+  background: #ffffff;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.careers-info h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  color: #0a1f44;
+  font-weight: 700;
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.careers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.career-card {
+  background: #f8fafc;
+  border-radius: 20px;
+  padding: 40px 30px;
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: all 0.4s ease;
+  text-align: center;
+}
+
+.career-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(10,31,68,0.1);
+  border-color: rgba(0,197,212,0.2);
+}
+
+.career-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: #0a1f44;
+  margin-bottom: 12px;
+}
+
+.career-card p {
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.7;
+}
 
 /* Hide file input */
-input[type="file"] {
-    display: none;
+input[type="file"] { display: none; }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive adjustments */
+@keyframes floatAround {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-30px) rotate(120deg); }
+  66% { transform: translateY(15px) rotate(240deg); }
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-    .career-container h1 {
-        font-size: 2.2rem;
-    }
-    .career-container p {
-        font-size: 1rem;
-    }
-    .upload-btn {
-        padding: 12px 20px;
-    }
+  .ca-hero { height: calc(100vh - 100px); }
+  .career-container h1 { font-size: 2.4rem; }
+  .career-container p { font-size: 1rem; }
+  .upload-btn { padding: 14px 36px; font-size: 0.95rem; }
+  .careers-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .navbar-spacer { height: 60px; }
+  .ca-hero { height: calc(100vh - 60px); }
+  .career-container h1 { font-size: 2rem; }
+  .upload-btn { padding: 13px 28px; }
 }

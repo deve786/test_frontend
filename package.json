@@ -1,9 +1,10 @@
 {
   "name": "my-react-app",
-  "homepage": "https://www.test.orbitqa.com",
+  "homepage": "https://www.orbitqa.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@sanity/client": "^7.20.0",
     "@sanity/image-url": "^2.1.0",
     "@testing-library/dom": "^10.4.1",
