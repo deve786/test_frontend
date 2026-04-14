@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Careers.css";
 import heroImage from "../assets/care.png";
+console.log(import.meta.env.REACT_APP_API_URL);
 
 const Careers = () => {
   const [file, setFile] = useState(null);
@@ -55,7 +56,8 @@ const Careers = () => {
 
     try {
       
-      const res = await fetch(`${import.meta.env.REACT_APP_API_URL}/api/careers`, {
+      
+      const res = await fetch("https://portfolio-backend-2-y4dg.onrender.com/api/careers", {  
         method: "POST",
         body: formData,
       });

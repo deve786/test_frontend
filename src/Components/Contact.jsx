@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import "./Contact.css";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+console.log(import.meta.env.REACT_APP_API_URL);
 
 const Contact = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -43,7 +44,9 @@ const Contact = () => {
 
     try {
       
-      const res = await fetch(`${import.meta.env.REACT_APP_API_URL}/api/contact`, {
+      
+        
+        const res = await fetch("https://portfolio-backend-2-y4dg.onrender.com/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData, captchaToken }),
