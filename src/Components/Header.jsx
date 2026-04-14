@@ -19,7 +19,8 @@ const Header = () => {
           <FaEnvelope />
           
         </a>
-        <a href="https://goo.gl/maps/xxxx" className="contact-link" target="_blank" rel="noopener noreferrer" title="Doha, Qatar">
+        <a href="https://www.google.com/maps/place/Orbit+Electronic+And+Telecommunication/@25.2019586,51.449671,788m/data=!3m1!1e3!4m14!1m7!3m6!1s0x3e45dac27e4fbdc5:0x8e0915d34baf550c!2sOrbit+Electronic+And+Telecommunication!8m2!3d25.2019586!4d51.449671!16s%2Fg%2F1hhh24ty0!3m5!1s0x3e45dac27e4fbdc5:0x8e0915d34baf550c!8m2!3d25.2019586!4d51.449671!16s%2Fg%2F1hhh24ty0?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D"
+         className="contact-link" target="_blank" rel="noopener noreferrer" title="Doha, Qatar">
           <FaMapMarkerAlt />
           
         </a>
